@@ -88,6 +88,23 @@ Elija una opcion:
 			].
 		opMenu:=(Prompter prompt: '2 --> Modificar otro expediente | 0 --> Volver al menu') asNumber.
 	].
+
+	“Eliminar un expediente de la colección”
+
+	[op==3] whileTrue: [
+	    exp_elim:=(Prompter prompt ‘Ingrese el numero de expediente a eliminar:’)asNumber.
+	    collexp:= oficina recuperar_exp.
+	    exp_rec:= collexp detect:[:expediente | expediente verNumero = exp_elim] ifNone:[^nil].
+	    (exp_rec ~= nil) ifTrue: [
+			oficina eliminarExp : exp_rec.
+	    ] ifFalse:[
+			MessageBox notify: 'No se encontró el expediente'.
+	].
+		opMenu:=(Prompter prompt: '3 --> Eliminar otro expediente| 0 --> Volver al menu')asNumber.
+	].
+
 ].
 
 oficina inspect.
+
+	
